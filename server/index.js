@@ -19,7 +19,7 @@ await db.run(`
     )
 `);
 
-//funcion para obtener mensajes
+//FUNCION PARA OBTENER MESAJES
     async function obtenerMensajes(){
         return new Promise((resolve,reject)=>{
             db.all('SELECT * FROM messages',[],(err,rows)=>{
@@ -32,9 +32,6 @@ await db.run(`
             })
         })
     }
-
-
-
 
 io.on('connection', async (socket) => {
     console.log('usuario conectado');
@@ -68,7 +65,7 @@ io.on('connection', async (socket) => {
         io.emit('chat message', msg);
     });
 
-    //boton borrar
+    //BOTON BORRAR PARA EL VACIO DE CHAT
     socket.on('vaciar tabla', async()=>{
         try{
             await db.run('DELETE FROM messages');
@@ -82,7 +79,7 @@ io.on('connection', async (socket) => {
     })
 
 
-    if (!socket.recovered) { // Recuperar
+    if (!socket.recovered) { // RECUPERADORS
         try {
             const results = await db.run(
                 'SELECT id, content FROM messages WHERE id > ?',
